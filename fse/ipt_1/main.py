@@ -39,23 +39,23 @@ day_list = [x for x in range(1, 32)]
 day = Combobox(window, values=day_list, width=3)
 day.current(14)
 day.place(x=40, y=50)
-#day_value = day.get()
+day_value = day.get()
 
 # создание поля для выбора месяца
 month_dict = {'Январь': 1, 'Февраль': 2, 'Март': 3,
 			  'Апрель': 4, 'Май': 5, 'Июнь': 6,
 			  'Июль': 7, 'Август': 8, 'Сентябрь': 9,
 			  'Октябрь': 10, 'Ноябрь': 11, 'Декабрь': 12}
-month = Combobox(window, values=month_dict.keys, state="readonly", width=10)
+month = Combobox(window, values=list(month_dict.keys()), state="readonly", width=10)
 month.current(6)
 month.place(x=110, y=50)
-#month_value = month.get()
+month_value = month.get()
 
 # создание поля для ввода года
-#default = StringVar(window, value=1410)
-#year = Entry(window, textvariable=default, width=7)
-#year.place(x=250, y=47)
-#year_value = year.get()
+default = StringVar(window, value=1410)
+year = Entry(window, textvariable=default, width=7)
+year.place(x=250, y=47)
+year_value = year.get()
 
 # Кнопка запуска алгоритма
 btn = Button(window, text='Узнать', command=clicked)
