@@ -23,7 +23,7 @@ def clicked():
 
 # создание основного окна
 window = Tk()
-window.geometry('500x350')
+window.geometry('350x150')
 window.resizable(0, 0)
 
 # заголовок программы
@@ -32,7 +32,7 @@ window.title("Вычисление дня недели по дате")
 # текст в окне программы
 text_1 = "Выберите дату"
 lbl_1 = Label(window, text=text_1)
-lbl_1.place(x=90, y=5)
+lbl_1.place(x=115, y=5)
 
 # создание поля для выбора дня
 day_list = [x for x in range(1, 32)]
@@ -58,9 +58,9 @@ year.place(x=250, y=47)
 year_value = year.get()
 
 # Кнопка запуска алгоритма
-btn = Button(window, text='Узнать', command=clicked)
+btn = Button(window, text='Узнать', command=clicked, width=10)
 btn.grid(column=1, row=0)
-btn.place(x=30, y=100)
+btn.place(x=105, y=100)
 
 
 window.mainloop()
