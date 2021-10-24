@@ -13,12 +13,21 @@ def weekday(y: int, m: int, d: int) -> int:
 		m += 10
 	else:
 		m -= 2
-	return (d + 31 * m // 12 + y + y // 4 - y // 100 + y // 400) % 7
+	dotw = (d + 31 * m // 12 + y + y // 4 - y // 100 + y // 400) % 7
+	dotw_dict = {0: 'Воскресенье', 1: 'Понедельник', 2: 'Вторник', 
+				 3: 'Среда', 4: 'Четверг', 5: 'Пятница', 6: 'Суббота'}
+	return dotw_dict[dotw]
 
 
 # вывод дня недели
 def clicked():
-	messagebox.showinfo('Title', 'Text')
+	year_value = int(year.get())
+	month_value = month.get()
+	month_value = month_dict[f"{month_value}"]
+	year_value = int(year.get())
+	day_value = int(day.get())
+
+	messagebox.showinfo('Title', weekday(year_value, month_value, day_value))
 
 
 # создание основного окна
@@ -39,7 +48,7 @@ day_list = [x for x in range(1, 32)]
 day = Combobox(window, values=day_list, width=3)
 day.current(14)
 day.place(x=40, y=50)
-day_value = day.get()
+#day_value = int(day.get())
 
 # создание поля для выбора месяца
 month_dict = {'Январь': 1, 'Февраль': 2, 'Март': 3,
@@ -47,20 +56,24 @@ month_dict = {'Январь': 1, 'Февраль': 2, 'Март': 3,
 			  'Июль': 7, 'Август': 8, 'Сентябрь': 9,
 			  'Октябрь': 10, 'Ноябрь': 11, 'Декабрь': 12}
 month = Combobox(window, values=list(month_dict.keys()), state="readonly", width=10)
-month.current(6)
+month.current(9)
 month.place(x=110, y=50)
-month_value = month.get()
+#month_value = month.get()
+#month_value = month_dict[f"{month_value}"]
 
 # создание поля для ввода года
-default = StringVar(window, value=1410)
+default = StringVar(window, value=1582)
 year = Entry(window, textvariable=default, width=7)
 year.place(x=250, y=47)
-year_value = year.get()
+#year_value = int(year.get())
 
 # Кнопка запуска алгоритма
 btn = Button(window, text='Узнать', command=clicked, width=10)
 btn.grid(column=1, row=0)
 btn.place(x=105, y=100)
+
+
+#print(weekday(year_value, month_value, day_value))
 
 
 window.mainloop()
