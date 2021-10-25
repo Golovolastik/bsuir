@@ -89,7 +89,7 @@ month.place(x=110, y=50)
 # создание поля для ввода года
 #default = StringVar(window, value=1582)
 #year = Entry(window, textvariable=default, width=7)
-year = Spinbox(window, from_=1582, to=2100, width=7, bg='gray')
+year = Spinbox(window, from_=1582, to=2100, width=7)
 year.place(x=250, y=50)
 
 # Кнопка запуска алгоритма
