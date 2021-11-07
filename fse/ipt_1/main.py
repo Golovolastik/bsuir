@@ -31,29 +31,49 @@ def clicked():
 			messagebox.showinfo('Ошибка', message_1)
 			return
 		year_value = int(year.get())
-		if year_value < 1582:
-			message_2 = 'Выберите дату не раньше 15.10.1582. \
+		# проверка на соответствие григорианскому календарю
+		message_2 = 'Выберите дату не раньше 15.10.1582. \
 						 Именно в тот день был введен григорианский календарь'
+		if year_value < 1582:
 			messagebox.showinfo('Ошибка', message_2)
 			return		
-		year_value = int(year.get())
-		# проверка на февраль и високосность
-		if year_value % 400 == 0:
-			bissextile = True
-		elif year_value % 100 == 0:
-			bissextile = False
-		elif year_value % 4 == 0:
-			bissextile = True
-		else:
-			bissextile = False
-		if (month_value == 2 and bissextile == False and day_value > 28):
-			messagebox.showinfo('Ошибка', 'В феврале 28 дней')
+		elif year_value == 1582 and month_value < 10:
+			messagebox.showinfo('Ошибка', message_2)
 			return
+		elif year_value == 1582 and month_value == 10 and day_value < 15:
+			messagebox.showinfo('Ошибка', message_2)
+			return
+		year_value = int(year.get())
+		# проверка месяца на кол-во дней
+		not_31_days = [2, 4, 6, 9, 11]
+		if month_value in not_31_days:
+			if day_value > 30:
+				message_3 = "В этом месяце не 31 день"
+				messagebox.showinfo('Ошибка', message_3)
+				return
+		if month_value == 2:
+			if day_value > 29:
+				message_4 = "В феврале 28 или 29 дней"
+				return
+			current_year = leap_year(year_value)
+			if day_value == 29 and not current_year:
+				message_5 = ""
 	except:
 		messagebox.showinfo('Ошибка', 'Введите дату')
 		return
 	messagebox.showinfo('День недели', weekday(year_value, month_value, day_value))
 
+# проверка на високосность
+def leap_year(y: int) -> bool:
+	if y % 400 == 0:
+		bissextile = True
+	elif y % 100 == 0:
+		bissextile = False
+	elif y % 4 == 0:
+		bissextile = True
+	else:
+		bissextile = False
+	return bissextile
 
 # создание основного окна
 window = Tk()
@@ -87,10 +107,10 @@ month.current(9)
 month.place(x=110, y=50)
 
 # создание поля для ввода года
-#default = StringVar(window, value=1582)
-#year = Entry(window, textvariable=default, width=7)
 year = Spinbox(window, from_=1582, to=2100, width=7)
 year.place(x=250, y=50)
+
+# кнопка проверки на високосность
 
 # Кнопка запуска алгоритма
 btn = Button(window, text='Узнать', command=clicked, width=10)
