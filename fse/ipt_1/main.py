@@ -51,13 +51,17 @@ def clicked():
 				message_3 = "В этом месяце не 31 день"
 				messagebox.showinfo('Ошибка', message_3)
 				return
+		# проверка февраля
 		if month_value == 2:
 			if day_value > 29:
-				message_4 = "В феврале 28 или 29 дней"
+				message_4 = "В феврале может быть 28 или 29 дней"
+				messagebox.showinfo('Ошибка', message_4)
 				return
 			current_year = leap_year(year_value)
 			if day_value == 29 and not current_year:
-				message_5 = ""
+				message_5 = "Этот год не високосный"
+				messagebox.showinfo('Ошибка', message_5)
+				return
 	except:
 		messagebox.showinfo('Ошибка', 'Введите дату')
 		return
