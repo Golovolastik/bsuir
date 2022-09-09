@@ -14,11 +14,12 @@ int main() {
     LIST* dict[255];
     while (1){
         cout << "1) Add" << endl;
-        cout << "2) Search" << endl;
+        cout << "2) Add from file" << endl;
         cout << "3) Delete" << endl;
         cout << "4) Info" << endl;
-        cout << "5) Exit" << endl;
-        int i;
+        cout << "5) Search" << endl;
+        cout << "6) Exit" << endl;
+        char i;
         cin >> i;
         switch (i) {
             case 1: {
@@ -38,9 +39,10 @@ int main() {
             case 4: {
                 break;
             }
-            case 5: {
+            case 6: {
                 return 0;
             }
+            default: break;
         }
     }
 }
