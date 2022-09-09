@@ -7,11 +7,11 @@ struct LIST{
     LIST* next;
 };
 
-void add(LIST* dict, string element);
+void add(LIST dict[], string element);
 int hash_function(string element);
 
 int main() {
-    LIST* dict[255];
+    LIST dict[255];
     while (1){
         cout << "1) Add" << endl;
         cout << "2) Add from file" << endl;
@@ -19,14 +19,14 @@ int main() {
         cout << "4) Info" << endl;
         cout << "5) Search" << endl;
         cout << "6) Exit" << endl;
-        char i;
+        int i;
         cin >> i;
         switch (i) {
             case 1: {
                 cout << "Enter element:" << endl;
                 string element;
                 cin >> element;
-                add(*dict, element);
+                add(dict, element);
                 break;
             }
             case 2: {
@@ -47,9 +47,10 @@ int main() {
     }
 }
 
-void add(LIST* dict, string element){
+void add(LIST dict[], string element){
     int hash = hash_function(element);
-    LIST temp = dict[hash];
+    dict[hash].value = element;
+    dict[hash].next = NULL;
     return;
 }
 
