@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#define SIZE 255
 
 using namespace std;
 
@@ -11,8 +13,8 @@ void add(LIST dict[], string element);
 int hash_function(string element);
 
 int main() {
-    LIST dict[25];
-    for (int i=0; i<5; i++){
+    LIST dict[SIZE];
+    for (int i=0; i<SIZE; i++){
         dict[i].value = "";
         dict[i].next = NULL;
     }
@@ -35,7 +37,14 @@ int main() {
                 break;
             }
             case 2: {
-                cout << "Hello" << endl;
+                ifstream file;
+                file.open ("wordlist.10000.txt");
+                string word;
+                while (file >> word)
+                {
+                    //cout << word << endl;
+                    add(dict, word);
+                }
                 break;
             }
             case 3: {
@@ -48,8 +57,9 @@ int main() {
                 return 0;
             }
             case 7: {
-                for (int i=0; i<5; i++){
-                    cout << dict[i].value << endl;
+                for (int i=0; i<SIZE; i++){
+                    printf("Value: %10s Index: %d\n", dict[i].value.c_str(), i);
+                    //cout << dict[i].value << endl;
                 }
             }
             default: break;
@@ -69,7 +79,7 @@ int hash_function(string element){
     for (int i=0; i<element.length(); i++){
         result += element[i];
     }
-    result %= 5;
-    cout << "Hash = " << result << endl;
+    result %= SIZE;
+    //cout << "Hash = " << result << endl;
     return result;
 }
