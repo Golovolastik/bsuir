@@ -14,10 +14,10 @@ int hash_function(string element);
 
 int main() {
     LIST dict[SIZE];
-    for (int i=0; i<SIZE; i++){
-        dict[i].value = "";
-        dict[i].next = NULL;
-    }
+//    for (int i=0; i<SIZE; i++){
+//        dict[i].value = "";
+//        dict[i].next = NULL;
+//    }
     while (1){
         cout << "1) Add" << endl;
         cout << "2) Add from file" << endl;
@@ -58,7 +58,7 @@ int main() {
             }
             case 7: {
                 for (int i=0; i<SIZE; i++){
-                    printf("Value: %10s Index: %d\n", dict[i].value.c_str(), i);
+                    printf("Index: %d Values: %s\n", dict[i].value.c_str(), i);
                     //cout << dict[i].value << endl;
                 }
             }
@@ -69,8 +69,11 @@ int main() {
 
 void add(LIST dict[], string element){
     int hash = hash_function(element);
-    dict[hash].value = element;
-    dict[hash].next = NULL;
+    if (dict[hash].value == ""){
+        dict[hash].value = element;
+        dict[hash].next = NULL;
+    }
+
     return;
 }
 
