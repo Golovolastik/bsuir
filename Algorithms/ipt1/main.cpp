@@ -11,7 +11,11 @@ void add(LIST dict[], string element);
 int hash_function(string element);
 
 int main() {
-    LIST dict[255];
+    LIST dict[25];
+    for (int i=0; i<5; i++){
+        dict[i].value = "";
+        dict[i].next = NULL;
+    }
     while (1){
         cout << "1) Add" << endl;
         cout << "2) Add from file" << endl;
@@ -19,6 +23,7 @@ int main() {
         cout << "4) Info" << endl;
         cout << "5) Search" << endl;
         cout << "6) Exit" << endl;
+        cout << "7) Print all" << endl;
         int i;
         cin >> i;
         switch (i) {
@@ -42,6 +47,11 @@ int main() {
             case 6: {
                 return 0;
             }
+            case 7: {
+                for (int i=0; i<5; i++){
+                    cout << dict[i].value << endl;
+                }
+            }
             default: break;
         }
     }
@@ -59,7 +69,7 @@ int hash_function(string element){
     for (int i=0; i<element.length(); i++){
         result += element[i];
     }
-    result %= 255;
+    result %= 5;
     cout << "Hash = " << result << endl;
     return result;
 }
