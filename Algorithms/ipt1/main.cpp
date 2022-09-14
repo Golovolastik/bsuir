@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#define SIZE 2
+#define SIZE 50
 
 using namespace std;
 
@@ -39,7 +39,7 @@ int main() {
             }
             case 2: {
                 ifstream file;
-                file.open ("sentence.txt");
+                file.open ("wordlist.10000.txt");
                 string word;
                 while (file >> word)
                 {
