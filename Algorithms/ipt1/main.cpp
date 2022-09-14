@@ -59,6 +59,7 @@ int main() {
             }
             case 7: {
                 for (int i=0; i<SIZE; i++){
+                    cout << "Index: " << i << " ";
                     print_list(dict[i]);
                     cout << endl;
                     //printf("Index: %d Values: %s\n", i, dict[i] -> value.c_str());
