@@ -89,7 +89,6 @@ int hash_function(string element){
         result += element[i];
     }
     result %= SIZE;
-    //cout << "Hash = " << result << endl;
     return result;
 }
 
