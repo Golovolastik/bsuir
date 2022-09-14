@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#define SIZE 255
+#define SIZE 3
 
 using namespace std;
 
@@ -11,6 +11,7 @@ struct LIST{
 
 void add(LIST dict[], string element);
 int hash_function(string element);
+void print_list(LIST list);
 
 int main() {
     LIST dict[SIZE];
@@ -58,7 +59,9 @@ int main() {
             }
             case 7: {
                 for (int i=0; i<SIZE; i++){
-                    printf("Index: %d Values: %s\n", dict[i].value.c_str(), i);
+                    print_list(dict[i]);
+                    cout << endl;
+                    //printf("Index: %d Values: %s\n", dict[i].value.c_str(), i);
                     //cout << dict[i].value << endl;
                 }
             }
@@ -72,9 +75,13 @@ void add(LIST dict[], string element){
     if (dict[hash].value == ""){
         dict[hash].value = element;
         dict[hash].next = NULL;
+    } else{
+        struct LIST* temp;
+        temp = new LIST;
+        temp -> value = element;
+        temp -> next = &dict[hash];
+        dict[hash] = *temp;
     }
-
-    return;
 }
 
 int hash_function(string element){
@@ -85,4 +92,14 @@ int hash_function(string element){
     result %= SIZE;
     //cout << "Hash = " << result << endl;
     return result;
+}
+
+void print_list(LIST list){
+    struct LIST temp = list;
+    do {
+        cout << temp.value << " ";
+        temp = *temp.next;
+    } while (temp.next != NULL);
+
+
 }
