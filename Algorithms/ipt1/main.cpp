@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#define SIZE 50
+#define SIZE 4
 
 using namespace std;
 
@@ -12,6 +12,7 @@ struct LIST{
 void add(LIST *dict[], string element);
 int hash_function(string element);
 void print_list(LIST *list);
+bool search(LIST *list[], string element);
 
 int main() {
     LIST *dict[SIZE];
@@ -39,7 +40,7 @@ int main() {
             }
             case 2: {
                 ifstream file;
-                file.open ("wordlist.10000.txt");
+                file.open ("sentence.txt");
                 string word;
                 while (file >> word)
                 {
@@ -52,6 +53,10 @@ int main() {
                 break;
             }
             case 4: {
+                break;
+            }
+            case 5: {
+                cout << search(dict, "hello") << endl;
                 break;
             }
             case 6: {
@@ -98,7 +103,17 @@ void print_list(LIST *list){
     do {
         cout << temp -> value << " ";
         temp = temp -> next;
-    } while (temp -> next != NULL);
+    } while (temp != NULL);
+}
 
-
+bool search(LIST *list[], string element){
+    int hash = hash_function(element);
+    struct LIST *temp = list[hash];
+    while (temp != NULL){
+        if (temp->value.compare(element) == 0) {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
 }
